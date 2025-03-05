@@ -13,6 +13,17 @@ const CardSchema = new mongoose.Schema({
   set: { type: String, index: true },  // Index for tracking expansions
 }, { timestamps: true });
 
+const mongoose = require('mongoose');
+
+const setsSchema = new mongoose.Schema({
+  name: { type: String, required: true, unique: true },
+  type: { type: String },
+  cardList: {String, required: true},
+}, { timestamps: true });
+
+module.exports = mongoose.model('Card', CardSchema);
+
+
 // Create Indexes
 CardSchema.index({ name: 1 });  // Speeds up search by name
 CardSchema.index({ type: 1 });  // Allows filtering by type

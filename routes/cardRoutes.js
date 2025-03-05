@@ -1,5 +1,5 @@
 const express = require('express');
-const Card = require('../models/Card');
+const Card = require('./models/Card.js');
 
 const router = express.Router();
 
@@ -18,17 +18,6 @@ router.post('/add', async (req, res) => {
 router.get('/all', async (req, res) => {
   try {
     const cards = await Card.find();
-    res.json(cards);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
-// Search cards by name
-router.get('/search', async (req, res) => {
-  try {
-    const { name } = req.query;
-    const cards = await Card.find({ name: new RegExp(name, 'i') });
     res.json(cards);
   } catch (error) {
     res.status(500).json({ error: error.message });
